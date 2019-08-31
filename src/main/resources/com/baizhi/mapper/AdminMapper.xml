@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.mapper.AdminMapper">
+
+    <select id="login" resultType="admin" parameterType="String">
+        select id,username,password from admin where username=#{username}
+    </select>
+    <select id="findRoleByAdmin" parameterType="admin" resultType="role">
+        select role.id,role.name
+        FROM (select admin.id,admin_role.role_id roleId
+			from admin LEFT JOIN admin_role
+			on admin.id=admin_role.admin_id
+			where admin.username=#{username}) aa LEFT JOIN role
+        on aa.roleId=role.id
+    </select>
+    <select id="findAuthorityByRole" parameterType="role" resultType="authority">
+        select authority.id,authority.resource
+        from (select role.id,role.name,role_authority.authority_id authorityId
+			from role LEFT JOIN role_authority
+			on role.id=role_authority.role_id
+			where role.name=#{name}) ra LEFT JOIN authority
+        on ra.authorityId=authority.id
+    </select>
+
+</mapper>

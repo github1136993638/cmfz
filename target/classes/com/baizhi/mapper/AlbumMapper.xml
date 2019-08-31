@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.mapper.AlbumMapper">
+
+    <select id="findAllAlbum" resultType="album">
+        select a.id,a.title,a.score,a.author,a.broadcast,a.count,a.brief,a.publish_date,a.cover,a.status
+        from (select id,title,score,author,broadcast,count,brief,publish_date,cover,status from album limit #{start},#{rows}) a
+    </select>
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*) from album
+    </select>
+    <insert id="insertAlbum" parameterType="album">
+        insert into album values (#{id},#{title},#{score},#{author},#{broadcast},#{count},#{brief},#{publish_date},#{cover},#{status})
+    </insert>
+    <delete id="deleteAlbum" parameterType="String">
+        delete from album where id in
+        <foreach collection="array" open="(" separator="," close=")" item="id">
+            #{id}
+        </foreach>
+    </delete>
+    <update id="updateAlbum" parameterType="album">
+        update album
+        set title=#{title},score=#{score},author=#{author},broadcast=#{broadcast},count=#{count},brief=#{brief},publish_date=#{publish_date},cover=#{cover},status=#{status}
+        where id=#{id}
+    </update>
+    <select id="findAlbumById" parameterType="java.lang.String" resultType="album">
+        select id,title,score,author,broadcast,count,brief,publish_date,cover,status
+        from album
+        where id=#{id}
+    </select>
+
+</mapper>

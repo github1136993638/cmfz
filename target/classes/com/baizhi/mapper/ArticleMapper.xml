@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.mapper.ArticleMapper">
+
+    <select id="findAllArticle" resultType="article">
+        select a.id,a.title,a.author,a.content,a.publish_date,a.status
+        from (select id,title,author,content,publish_date,status from article limit #{start},#{rows}) a
+    </select>
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*) from article
+    </select>
+    <insert id="insertArticle" parameterType="article">
+        insert into article values(#{id},#{title},#{author},#{content},#{publish_date},#{status})
+    </insert>
+    <update id="updateArticle" parameterType="article">
+        update article set status=#{status},content=#{content} where id=#{id}
+    </update>
+    <select id="findArticleById" parameterType="String" resultType="article">
+        select id,title,author,content,publish_date,status from article where id=#{id}
+    </select>
+
+</mapper>

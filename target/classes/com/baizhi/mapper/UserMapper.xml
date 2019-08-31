@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.mapper.UserMapper">
+    <!--开启mybatis缓存 修改mybatis的默认缓存实现-->
+    <!--<cache type="com.baizhi.cache.RedisCache"></cache>
+    &lt;!&ndash;<cache></cache>&ndash;&gt;-->
+    <!--map手册-->
+    <select id="findAllUser" resultType="user">
+        select cu.id,cu.phone,cu.password,cu.head_picture,cu.name,cu.dharma,cu.sex,cu.province,cu.city,cu.sign,cu.status,cu.create_date,cu.guru
+        from (select id,phone,password,head_picture,name,dharma,sex,province,city,sign,status,create_date,guru
+                from cmfz_user limit #{start},#{rows}
+            ) cu
+    </select>
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*) from cmfz_user
+    </select>
+    <select id="findAll" resultType="user">
+        select id,phone,password,head_picture,name,dharma,sex,province,city,sign,status,create_date,guru
+        from cmfz_user
+    </select>
+    <update id="updateUser" parameterType="user">
+        update cmfz_user set status=#{status} where id=#{id}
+    </update>
+    <select id="login" resultType="user">
+        select id,phone,password,head_picture,name,dharma,sex,province,city,sign,status
+        from cmfz_user
+        where phone=#{phone} and password=#{password}
+    </select>
+    <insert id="regist" parameterType="user">
+        insert into cmfz_user values (#{id},#{phone},#{password},#{head_picture},#{name},#{dharma},#{sex},#{province},#{city},#{sign},#{status},#{create_date},#{guru})
+    </insert>
+    <select id="findAllByProvince" parameterType="String" resultType="user">
+        select id,phone,password,head_picture,name,dharma,sex,province,city,sign,status,create_date,guru
+        from cmfz_user
+        where province=#{province}
+    </select>
+    <select id="findAllByDate" parameterType="java.util.Date" resultType="user">
+        select id,phone,password,head_picture,name,dharma,sex,province,city,sign,status,create_date,guru
+        from cmfz_user
+        where create_date=#{create_date}
+    </select>
+</mapper>
