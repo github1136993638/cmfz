@@ -12,4 +12,6 @@ public interface ArticleService {
     public void updateArticle(Article article);
 
     public Article findArticleById(String id);
+
+    //public Map<Object, Object> findArticle(String keyword, Integer page, Integer size, String filter);
 }

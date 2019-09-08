@@ -35,21 +35,15 @@ public class MyRealm extends AuthorizingRealm {
         if (primaryPrincipal != null) {
             //给主身份添加角色（角色是从数据库中查询而来）
             List<Role> roleByAdmin = adminMapper.findRoleByAdmin(admin);
-            for (Role role : roleByAdmin) {
-                authorizationInfo.addRole(role.getName());
-            }
             //给主身份添加权限（权限是从数据库中查询而来）
             Set<String> authority = new HashSet<>();
             for (Role role : roleByAdmin) {
-                System.out.println(role);
                 Set<Authority> authorityByRole = adminMapper.findAuthorityByRole(role);
                 for (Authority authority1 : authorityByRole) {
-                    System.out.println(authority1);
                     authority.add(authority1.getResource());
                 }
             }
             for (String s : authority) {
-                System.out.println(s);
                 authorizationInfo.addStringPermission(s + ":*");
             }
             //权限的标识解释：

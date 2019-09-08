@@ -43,7 +43,9 @@ public class ShiroFilter {
         map.put("/boot/fonts/*", "anon");
         map.put("/echarts/*", "anon");
         map.put("/jqgrid/*", "anon");
-        map.put("/login/assets/*", "anon");
+        map.put("/login/assets/**", "anon");
+        map.put("/kindeditor/**", "anon");
+        map.put("/img/*", "anon");
         //将拦截器的集合设置进过滤器链中。
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         //配置强制登陆的jsp页面的位置和名称

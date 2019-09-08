@@ -162,16 +162,37 @@
         )*/
     }
 
-</script>
+    function search() {
+        $.ajax({
+            url: "${cmfz}/article/findArticle",
+            datatype: "json",
+            type: "post",
+            data: $("#addArticleFrom").serialize(),
+            success: function () {
+                //$("#articleList").trigger("reloadGrid");
+            }
+        })
+    }
 
-<div>
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active" id="active"><a href="#home" aria-controls="home" role="tab"
+</script>
+<div class="row">
+    <div class="col-lg-4">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active" id="active"><a href="#home" aria-controls="home" role="tab"
                                                               data-toggle="tab">文章列表</a></li>
-        <li role="presentation"><a href="#profile" onclick="showModel()" aria-controls="profile" role="tab"
-                                   data-toggle="tab">添加文章</a></li>
-    </ul>
+            <li role="presentation"><a href="#profile" onclick="showModel()" aria-controls="profile" role="tab"
+                                       data-toggle="tab">添加文章</a></li>
+        </ul>
+    </div>
+    <div class="col-lg-4">
+        <div class="input-group">
+            <input type="text" id="search" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+            <a href="#" onclick="search()"><button class="btn btn-default" type="button">Go!</button></a>
+            </span>
+        </div><!-- /input-group -->
+    </div>
 </div>
 <table id="articleList"></table>
 <div id="articlePaper" style="height: 50px"></div>

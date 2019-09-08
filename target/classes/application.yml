@@ -24,6 +24,12 @@ spring:
     date-format: "yyyy-MM-dd"
     time-zone: "GMT+8"    #解决Mysql数据库显示时间，与程序获取到的不一致的问题
     default-property-inclusion: non_null
+  data:
+    elasticsearch:
+      cluster-nodes: 192.168.244.231:9300
+  redis:
+    host: 192.168.244.230
+    port: 7000
 mybatis:
   type-aliases-package: com.baizhi.entity
   mapper-locations: classpath:com/baizhi/mapper/*Mapper.xml

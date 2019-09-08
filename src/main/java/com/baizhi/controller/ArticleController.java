@@ -23,6 +23,11 @@ public class ArticleController {
     public Map<Object, Object> findAllArticle(Integer page, Integer rows) {
         return articleService.findAllArticle(page, rows);
     }
+    /*@RequestMapping("/findArticle")
+    public Map<Object, Object> findArticle(String keyword, Integer page, Integer size, String filter){
+        Map<Object, Object> article = articleService.findArticle(keyword, page, size, filter);
+        return article;
+    }*/
 
     @RequestMapping("/editArticle")
     public void editArticle(Article article, String oper) {
