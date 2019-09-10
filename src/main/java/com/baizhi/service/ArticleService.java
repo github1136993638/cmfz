@@ -2,6 +2,7 @@ package com.baizhi.service;
 
 import com.baizhi.entity.Article;
 
+import java.util.List;
 import java.util.Map;
 
 public interface ArticleService {
@@ -13,5 +14,5 @@ public interface ArticleService {
 
     public Article findArticleById(String id);
 
-    //public Map<Object, Object> findArticle(String keyword, Integer page, Integer size, String filter);
+    public List<Article> findArticle(String val);
 }

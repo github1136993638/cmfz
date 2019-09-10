@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -23,11 +24,12 @@ public class ArticleController {
     public Map<Object, Object> findAllArticle(Integer page, Integer rows) {
         return articleService.findAllArticle(page, rows);
     }
-    /*@RequestMapping("/findArticle")
-    public Map<Object, Object> findArticle(String keyword, Integer page, Integer size, String filter){
-        Map<Object, Object> article = articleService.findArticle(keyword, page, size, filter);
-        return article;
-    }*/
+
+    @RequestMapping("/findArticle")
+    public List<Article> findArticle(String val) {
+        List<Article> articles = articleService.findArticle(val);
+        return articles;
+    }
 
     @RequestMapping("/editArticle")
     public void editArticle(Article article, String oper) {

@@ -162,17 +162,12 @@
         )*/
     }
 
-    function search() {
-        $.ajax({
-            url: "${cmfz}/article/findArticle",
-            datatype: "json",
-            type: "post",
-            data: $("#addArticleFrom").serialize(),
-            success: function () {
-                //$("#articleList").trigger("reloadGrid");
-            }
+    $(function () {
+        $("#search").click(function () {
+            var val = $("#esValue").val();
+            $('#content').load('${cmfz}/back/esArticle.jsp?val=' + val);
         })
-    }
+    })
 
 </script>
 <div class="row">
@@ -187,9 +182,9 @@
     </div>
     <div class="col-lg-4">
         <div class="input-group">
-            <input type="text" id="search" class="form-control" placeholder="Search for...">
+            <input type="text" id="esValue" class="form-control" placeholder="请输入关键字">
             <span class="input-group-btn">
-            <a href="#" onclick="search()"><button class="btn btn-default" type="button">Go!</button></a>
+            <button id="search" class="btn btn-default" type="button">搜索</button>
             </span>
         </div><!-- /input-group -->
     </div>
